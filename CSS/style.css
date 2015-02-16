@@ -1,0 +1,164 @@
+.corPadrao{
+    background:#edf;
+}
+.corCorpo{
+    background:#eef;
+}
+.centerDiv{
+    border-radius: 25px;
+    padding:10px;
+    width:400px;
+    margin-left:-200px;
+    height:275px;
+    margin-top:-150px;
+    position:absolute;
+    top:50%;
+    left:50%;
+}
+.menuSuperior{
+    border-radius:15px;
+}
+.corpo{
+    border-radius: 15px;
+    padding:10px;  
+}
+.botaoVerde{
+    background-color: #9f9;
+    border-radius: 10px;
+    border: #8a9 1px solid;
+    font-size: 16px;
+    font-weight: bold;
+    height: 35px;
+    line-height: 30px;
+    padding-left: 10px; 
+    padding-right: 10px;
+    cursor: pointer;
+    color: #565;
+}
+.botaoAdicionar{
+    background-color: #ccc;
+    border-radius: 10px;
+    border: #999 1px solid;
+    font-size: 14px;
+    height: 35px;
+    line-height: 26px;
+    padding-left: 10px; 
+    padding-right: 10px;
+    cursor: pointer;
+    color: #545;
+}
+.botaoAdicionarRedondo{
+    background-color: #ccc;
+    border-radius: 20px;
+    border: #999 1px solid;
+    font-size: 14px;
+    height: 35px;
+    line-height: 26px;
+    padding-left: 8px; 
+    padding-right: 8px;
+    cursor: pointer;
+    color: #545;
+}
+.botaoVerde:hover{
+    background-color: #bfb;
+    color: #4a4;
+}
+.botaoAdicionar:hover{
+    background-color: #ddd;
+}
+.erro{
+    line-height: 30px;
+    height:30px;
+    border-radius:5px;
+    font-size:20px;
+    background-color: #f66;
+    color: #edf;
+}
+.inputText{
+    height: 25px;
+    font-size: 16px;
+}
+.divisoria{
+    border: 1px #ccc solid;
+    border-radius: 13px;    
+}
+
+.boxIcone{
+    height:3px;
+    width:30px;
+    background-color:#daf;
+    border-radius:4px;
+    margin:3px;
+}
+.boxIconeVertical{
+    height:30px;
+    width:3px;
+    background-color:#daf;
+    border-radius:4px;
+    margin:3px;
+}
+*{
+    margin: 0; 
+    padding: 2px;
+}
+body{
+    font-size: 16px;
+}
+ 
+.menu{
+    list-style:none; 
+    float:left; 
+}
+.menu li{
+    position:relative; 
+}
+.menu li a{
+    color:#333; 
+    text-decoration:none; 
+    padding:5px 10px; 
+    display:block;
+}
+.menu li a:hover{
+    background:#eee;
+    width: 40px;
+    height:30px;
+    border-radius: 7px;
+    -moz-box-shadow:0 3px 10px 0 #CCC;
+    -webkit-box-shadow:0 3px 10px 0 #ccc;
+    text-shadow:0px 0px 5px #fff;
+}
+.menu li ul{
+    position:absolute;
+    top:42px;
+    left:0;
+    background-color:#ccc;
+    border-radius: 7px;
+    display:none;
+} 
+.menu li:hover ul, .menu li.over ul{
+    display:block;
+    width:150px;
+}
+.menu li ul li{
+    display:block;
+    width:150px;
+}
+.menu li ul li a:hover{
+    width: 126px;
+    height: 18px;
+}
+
+ul.ui-autocomplete.ui-menu {
+    background: #ddd;
+    font-size:16px;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover, .ui-state-focus, 
+.ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #eee;
+    border: 1px solid #bbb;
+    border-radius: 15px;
+    color:#000;
+    border-radius:0;
+    font-weight: normal;
+}

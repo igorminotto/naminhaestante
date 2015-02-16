@@ -1,0 +1,97 @@
+/* CREATE DATABASE estante */
+
+DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS livros;
+DROP TABLE IF EXISTS edicoes;
+DROP TABLE IF EXISTS generos;
+DROP TABLE IF EXISTS autores;
+DROP TABLE IF EXISTS editoras;
+
+DROP TABLE IF EXISTS edicoes_possuidas;
+DROP TABLE IF EXISTS edicoes_lidas;
+DROP TABLE IF EXISTS livros_escritos;
+DROP TABLE IF EXISTS livros_da_edicao;
+DROP TABLE IF EXISTS generos_do_livro;
+
+CREATE TABLE usuarios
+(
+	id_usuario int			NOT NULL AUTO_INCREMENT,
+	nome varchar(255)		NOT NULL,
+	email varchar(255)		NOT NULL,
+	senha varchar(255) 		NOT NULL,
+	PRIMARY KEY(id_usuario,nome,email,senha)
+);
+CREATE TABLE livros
+(
+	id_livro int 			NOT NULL AUTO_INCREMENT,
+	titulo varchar(255) 	NOT NULL,
+	ano year,
+	PRIMARY KEY(id_livro,titulo)
+);
+CREATE TABLE generos
+(
+	id_genero int			NOT NULL AUTO_INCREMENT,
+	descricao varchar(255)	NOT NULL,
+	PRIMARY KEY(id_genero,descricao)
+);
+CREATE TABLE autores
+(
+	id_autor int			NOT NULL AUTO_INCREMENT,
+	nome varchar(255)		NOT NULL,
+	PRIMARY KEY(id_autor,nome)
+);
+CREATE TABLE editoras
+(
+	id_editora int			NOT NULL AUTO_INCREMENT,
+	nome varchar(255)		NOT NULL,
+	PRIMARY KEY(id_editora,nome)
+);
+CREATE TABLE edicoes
+(
+	id_edicao int			NOT NULL AUTO_INCREMENT,
+	nome varchar(255)		NOT NULL,
+	id_editora int			NOT NULL,
+	lingua varchar(255),		
+	ano year,
+	numero_de_paginas int,
+	PRIMARY KEY(id_edicao,id_editora,nome)		
+);
+#----------------------------Relações----------------------------------#
+CREATE TABLE edicoes_possuidas
+(
+	id_edicao_possuida int	NOT NULL AUTO_INCREMENT,
+	id_usuario int			NOT NULL,
+	id_edicao int			NOT NULL,
+	posicao varchar(255),
+	PRIMARY KEY(id_edicao_possuida,id_usuario,id_edicao)
+);
+CREATE TABLE edicoes_lidas
+(
+	id_edicao_lida int		NOT NULL AUTO_INCREMENT,
+	id_usuario int			NOT NULL,
+	id_edicao int			NOT NULL,
+	data_Inicio DATE,
+	data_fim DATE,
+	PRIMARY KEY(id_edicao_lida,id_usuario,id_edicao)
+);
+CREATE TABLE livros_da_edicao
+(
+	id_livro_da_edicao int	NOT NULL AUTO_INCREMENT,
+	id_livro int			NOT NULL,
+	id_edicao int			NOT NULL,
+	PRIMARY KEY(id_livro_da_edicao,id_livro,id_edicao)
+);
+CREATE TABLE livros_escritos
+(
+	id_livro_escrito int	NOT NULL AUTO_INCREMENT,
+	id_autor int			NOT NULL,
+	id_livro int			NOT NULL,
+	PRIMARY KEY(id_livro_escrito,id_autor,id_livro)
+);
+CREATE TABLE generos_do_livro
+(
+	id_genero_do_livro int	NOT NULL AUTO_INCREMENT,
+	id_genero int			NOT NULL,
+	id_livro int			NOT NULL,
+	PRIMARY KEY(id_genero_do_livro,id_genero,id_livro)
+);
