@@ -10,7 +10,7 @@ class ConnectionFactory {
     private $conexao;
     
     public function __construct() {
-        $infoBD = parse_ini_file('/var/www/estante/config/bancoDeDados.ini');
+        $infoBD = parse_ini_file('/var/www/naminhaestante/config/bancoDeDados.ini');
         $this->BANCO_DE_DADOS = $infoBD['database'];
         $this->USUARIO = $infoBD['username'];
         $this->SENHA = $infoBD['password'];

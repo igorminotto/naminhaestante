@@ -1,7 +1,7 @@
 <?php  
 
 function autoload($Class) {
-    $raiz = '/var/www/estante/';
+    $raiz = '/var/www/naminhaestante/';
     // nome completo da classe
     $nomeCompleto = str_replace('\\', '/', $Class);
     // se está tentando carregar uma classe da Monolog
