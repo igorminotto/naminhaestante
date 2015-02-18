@@ -7,11 +7,8 @@ use dao\EdicaoDao;
 use dao\EditoraDao;
 use dao\GeneroDao;
 use dao\LivroDao;
-use model\Autor;
 use model\Edicao;
 use model\Editora;
-use model\Genero;
-use model\Livro;
 
 $query = filter_input(INPUT_POST, 'query', FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -20,38 +17,21 @@ $usuarioLogado = $controlador->selecionaUsuarioLogado();
 $idUsuarioLogado = $usuarioLogado->getId();
 
 $livroDao = new LivroDao;
-$autorDao = new AutorDao;
-$generoDao = new GeneroDao;
 $editoraDao = new EditoraDao;
 $edicaoDao = new EdicaoDao;
 
 switch ($query) {
-    case 'Inserir Livro':
-        $titulo  = filter_input(INPUT_POST, 'titulo' , FILTER_SANITIZE_SPECIAL_CHARS);
-        $ano     = filter_input(INPUT_POST, 'ano'    , FILTER_VALIDATE_INT);
-        $livro   = new Livro(null, $titulo, $ano);
-        
-        $autores = filter_input(INPUT_POST, 'autores', FILTER_DEFAULT , FILTER_REQUIRE_ARRAY);
-        foreach($autores as $nomeDoAutor) {
-            $autor = current($autorDao->selecionaAutores($nomeDoAutor));
-            if(!$autor) {
-                $autor = new Autor(null, $nomeDoAutor);
-            }
-            $livro->addAutor($autor);
+    case 'Inserir':
+        $titulos = filter_input(INPUT_POST, 'livros' , FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FORCE_ARRAY);
+        $livros = array();
+        foreach ($titulos as $titulo) {
+            $livros[] = current($livroDao->buscaLivro($titulo));
         }
+        if(count($titulos) === 1) {
+            $titulo = current($titulos);
+        } 
         
-        $generos = filter_input(INPUT_POST, 'generos', FILTER_DEFAULT , FILTER_REQUIRE_ARRAY);
-        foreach($generos as $descGenero) {
-            $genero = current($generoDao->selecionaGeneros($descGenero));
-            if(!$genero) {
-                $genero = new Genero(null, $descGenero);
-            }
-            $livro->addGenero($genero);
-        }
-        
-        $livro->setIdUsuario($idUsuarioLogado);
-        $idLivro = $livroDao->insereLivro($livro);
-        
+        exit;
         $nomeDaEditora = filter_input(INPUT_POST, 'editora' , FILTER_SANITIZE_SPECIAL_CHARS);
         $editora = current($editoraDao->selecionaEditoras($nomeDaEditora));
         if(!$editora) {

@@ -13,6 +13,8 @@ foreach($editoras as $editora)
 $listaEditoras = '["'. implode('","', $nomesEditoras) . '"]';
 ?>
 <table id="tabelaEdicao">
+    <tr><td class="labelForm">Titulo da editora</td><td><input type="text" size='50' name='titulo' required/></td>
+        <td width='20'></td></tr>
     <tr><td class="labelForm">Editora</td><td><input type="text" size='50' name='editora' required/></td>
         <td width='20'></td></tr>
     <tr><td class="labelForm">Língua</td><td><input type="text" size='20' name='lingua' /></td>

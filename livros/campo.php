@@ -8,8 +8,7 @@ $livroDao = new LivroDao;
 $livros = $livroDao->selecionaLivros();
 $nomesDoLivros = array();
 /* @var $livro Livro */
-foreach($livros as $idLivro => $livro)
-{
+foreach($livros as $idLivro => $livro) {
     $titulosDosLivros[$idLivro] = $livro->getTitulo();
 }
 $listaLivros = '["'. implode('","', $titulosDosLivros) . '"]';
@@ -30,7 +29,10 @@ $listaLivros = '["'. implode('","', $titulosDosLivros) . '"]';
         }
         html += '</td></tr>';
         $('#tabelaLivros').append(html);
-        $('.inputLivro').autocomplete({source:livros});
+        $('.inputLivro').autocomplete({
+            source:livros,
+            minLength:2
+        });
         $('.botaoDeletar').click(deletarInput);
     }
     $('#adicionarLivro').click(function() {

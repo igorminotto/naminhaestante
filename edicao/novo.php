@@ -35,8 +35,9 @@ $usuario = controladorDeSessao::selecionaUsuarioLogado();
     <div class='corCorpo corpo' align="center">
         <h3>Nova Edição</h3>
         <div style='width:650px'>
-            <form action="../controller/livro.php" method='post'> 
+            <form action="../controller/edicao.php" method='post'> 
                 <div class='divisoria'>
+                        
                     <?php include_once 'form.php' ?>    
                     <br/>
                     <br/>
@@ -47,7 +48,7 @@ $usuario = controladorDeSessao::selecionaUsuarioLogado();
                     <br/>
                 </div>
                 <br/>
-                    <input class="botaoVerde" name='query' value='Inserir Edição' type="submit"/>
+                <input class="botaoVerde" name='query' value='Inserir' type="submit"/>
                 <br/><br/>
             </form>
             <script>

@@ -54,6 +54,19 @@ class LivroDao extends ConnectionFactory {
         return $livro;
     }
     
+    public function buscaLivro($possivelTitulo) {
+        $query = "SELECT id_livro "
+                . "FROM livros "
+                . "WHERE titulo like '%$possivelTitulo%'";
+        $result = $this->executaQuery($query);
+        $livros = array();
+        while($ln = mysql_fetch_assoc($result)) {
+            $idLivro = $ln['id_livro'];
+            $livros[$idLivro] = $this->selecionaLivro($idLivro);
+        }
+        return $livros;
+    }
+    
     public function insereLivro(Livro $livro) {
         $query = "INSERT INTO livros (titulo,ano)"
                 . "VALUES ('{$livro->getTitulo()}',{$livro->getAno()}) ";
