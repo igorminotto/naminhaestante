@@ -6,7 +6,7 @@ use model\Livro;
 $livroDao = new LivroDao;
 
 $livros = $livroDao->selecionaLivros();
-$nomesDoLivros = array();
+$titulosDosLivros = array();
 /* @var $livro Livro */
 foreach($livros as $idLivro => $livro) {
     $titulosDosLivros[$idLivro] = $livro->getTitulo();

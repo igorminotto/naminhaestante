@@ -5,7 +5,7 @@ use dao\AutorDao;
 $autorDao = new AutorDao;
 
 $autores = $autorDao->selecionaAutores();
-$nomesDoAutores = array();
+$nomesDosAutores = array();
 foreach($autores as $autor)
 {
     $nomesDosAutores[] = $autor->getNome();
