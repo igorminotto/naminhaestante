@@ -18,38 +18,81 @@ class Data {
     const ANO_MES = 2;
     const ANO_MES_DIA = 3;
     
+    private $dataBanco;
     private $data;
+    private $ano;
+    private $mes;
+    private $dia;
     private $tipo;
     
     public function __construct($data) {
         $valido = $this->dataEhValida($data);
         if($valido) {
-            $this->data = $valido;
+            $this->data = $data;
+            $this->dataBanco = $valido;
         } else {
-            $this->data = null; 
+            $valido = $this->dataBancoEhValida($data);
+            if($valido) {
+                $this->data = $valido;
+                $this->dataBanco = $data;
+            } else {
+                $this->data = false; 
+                $this->dataBanco = "";
+            }
         }
+        $valores = explode("-", $this->dataBanco);    
+        switch(count($valores)) {
+            case 3:
+                $this->dia = $valores[2];
+            case 2:
+                $this->mes = $valores[1];
+            case 1:
+                $this->ano = $valores[0];
+                break;
+            default:
+                $this->ano = null;
+                $this->mes = null;
+                $this->dia = null;
+                $this->tipo = null;
+        }
+        $this->tipo = count($valores);
     }
     
-    public function getDataFormatBanco() {
-        return $this->data->format('Y-m-d');
+    public function getData() {
+        return $this->data;
+    }
+    
+    public function getDataFormatoBanco() {
+        return $this->dataBanco;
     }
     
     private function dataEhValida($data) {
-        if(preg_match("`^(\d{2})//(\d{2})//(\d{4})$`", $data, $matches)) {
-            var_dump($matches);
-            $dataTmp = new DateTime;
-            $dataTmp->setDate($matches[3], $matches[2], $matches[1]);
-            if($dataTmp->format('d') !== $matches[1] ||
-                    $dataTmp->format('m') !== $matches[2] ||
-                    $dataTmp->format('Y') !== $matches[3]) {
-                return false;
-            }
-            return $dataTmp;
+        if(preg_match("`^(\d{4})$`", $data, $matches)) {
+            return "{$matches[1]}";
+        }
+        if(preg_match("`^(\d{2})/(\d{4})$`", $data, $matches)) {
+            return "{$matches[2]}-{$matches[1]}";
+        }
+        if(preg_match("`^(\d{2})/(\d{2})/(\d{4})$`", $data, $matches)) {
+            return "{$matches[3]}-{$matches[2]}-{$matches[1]}";
+        }
+        return false;
+    }
+    
+    private function dataBancoEhValida($data) {
+        if(preg_match("`^(\d{4})$`", $data, $matches)) {
+            return "{$matches[1]}";
+        }
+        if(preg_match("`^(\d{4})-(\d{2})$`", $data, $matches)) {
+            return "{$matches[2]}/{$matches[1]}";
+        }
+        if(preg_match("`^(\d{4})-(\d{2})-(\d{2})$`", $data, $matches)) {
+            return "{$matches[3]}/{$matches[2]}/{$matches[1]}";
         }
         return false;
     }
     
     public function __toString() {
-        $this->getDataFormatBanco();
+        return $this->getDataFormatoBanco();
     }
 }

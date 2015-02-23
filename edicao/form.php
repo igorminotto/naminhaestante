@@ -36,9 +36,14 @@ $listaEditoras = '["'. implode('","', $nomesEditoras) . '"]';
         <td width='100'><input type="radio" size='50' name='lido' value='true' >Sim</td>
         <td width='335'><input type="radio" size='50' name='lido' value='false' checked>Não</td></tr>
     <tr id='datas' style="display:none"><td></td><td colspan="2">
-            <div class='divisoria' style='height:40px;width:370px;text-align:center;line-height: 40px;'>
-            De&nbsp;<input style="width:135px" name='dataInicio' type="date">&nbsp;
-            até&nbsp;<input style="width:135px" name='dataFim' type="date"></div>
+            <div class='divisoria' style='height:120px;width:300px;text-align:center;line-height: 40px;'>
+                De <?php echo Layout\Layout::geraSelectBoxesData("Inicio"); ?><br>
+                até <?php echo Layout\Layout::geraSelectBoxesData("Fim"); ?><br>
+                Ano em que foi lido: 
+                <span id="divAnoLido">
+                    <input type="text" name="anoLido" size="4" maxlength="4" value="" disabled/>
+                </span>
+            </div>
         </td>
     </tr>
 </table>
@@ -53,6 +58,41 @@ $listaEditoras = '["'. implode('","', $nomesEditoras) . '"]';
        } else {
            $('#datas').hide();
        }
+    });
+    
+    function atualizaSelectAnoFim() {
+        var d = new Date();
+        var year = d.getFullYear();
+        var html = "";
+        for (i = year; i >= $("[name=anoInicio]").val(); i--) {
+            html = html + "<option value='"+i+"'>"+i+"</option>";
+        }
+        $("[name=anoFim]").html(html);
+        $("[name=anoFim]").val($("[name=anoInicio]").val());
+    }
+    function atualizaSelectAnoLido() {
+        var html = "<select name='anoLido'>";
+        for (i = $("[name=anoFim]").val(); i >= $("[name=anoInicio]").val(); i--) {
+            html = html + "<option value='"+i+"'>"+i+"</option>";
+        }
+        html += "</select>";
+        $("#divAnoLido").html(html);
+        $("[name=anoLido]").val($("[name=anoFim]").val());
+    }
+    function atualizaAnoLido() {
+        atualizaSelectAnoLido();
+        if($("[name=anoInicio]").val() === $("[name=anoFim]").val()) {
+            $('[name=anoLido]').prop("disabled",true);
+        }
+    }
+    atualizaSelectAnoFim();
+    atualizaAnoLido();
+    $("[name=anoInicio]").change(function () {
+        atualizaSelectAnoFim();
+        atualizaAnoLido();
+    });
+    $("[name=anoFim]").change(function () {
+        atualizaAnoLido();
     });
 </script>
     

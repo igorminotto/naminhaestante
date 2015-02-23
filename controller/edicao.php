@@ -2,10 +2,8 @@
 
 use classes\Data;
 use controller\controladorDeSessao;
-use dao\AutorDao;
 use dao\EdicaoDao;
 use dao\EditoraDao;
-use dao\GeneroDao;
 use dao\LivroDao;
 use model\Edicao;
 use model\Editora;

@@ -153,4 +153,43 @@ END;
         </div></div>
 END;
     }
+    
+    static function geraSelectBoxesData($nome) {
+        $return = self::geraSelectBoxDia($nome);
+        $return .= " / ".self::geraSelectBoxMes($nome);
+        $return .= " / ".self::geraSelectBoxAno($nome);
+        return $return;
+    }
+    private function geraSelectBoxDia($nome) {
+        $valores = self::rangeWithKeys(1,31);
+        return self::geraSelectBoxGenerico($valores, "dia$nome", 0, "Dia");
+    }
+    private function geraSelectBoxMes($nome) {
+        $valores = self::rangeWithKeys(1,12);
+        return self::geraSelectBoxGenerico($valores, "mes$nome", 0, "Mês");
+    }
+    private function geraSelectBoxAno($nome) {
+        $valores = self::rangeWithKeys(date("Y"),1992);
+        return self::geraSelectBoxGenerico($valores, "ano$nome", key($valores));
+    }
+    private function geraSelectBoxGenerico($valores, $nome, $chavePadrão=null, $valorPadrão=null) {
+        $html = "<select name='$nome'>";
+        if($chavePadrão !== null && !key_exists($chavePadrão, $valores)) {
+            $html .= "<option value='$chavePadrão'>$valorPadrão</option>";
+        }
+        foreach ($valores as $chave => $valor) {
+            $selected = ($chave == $chavePadrão)?"selected":"";
+            $html .= "<option value='$chave' $selected>$valor</option>";
+        }
+        $html .= "</select>";
+        return $html;
+    }
+    private function rangeWithKeys($begin, $end) {
+        $rng = range($begin,$end);
+        $values = array();
+        foreach ($rng as $val) {
+            $values[$val] = $val;
+        } 
+        return $values;
+    }
 }
