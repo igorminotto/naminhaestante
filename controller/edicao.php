@@ -25,11 +25,12 @@ switch ($query) {
         foreach ($titulos as $titulo) {
             $livros[] = current($livroDao->buscaLivro($titulo));
         }
-        if(count($titulos) === 1) {
+        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
+        if(count($titulos) === 1 || empty($titulo)) {
+            reset($titulos);
             $titulo = current($titulos);
-        } 
+        }
         
-        exit;
         $nomeDaEditora = filter_input(INPUT_POST, 'editora' , FILTER_SANITIZE_SPECIAL_CHARS);
         $editora = current($editoraDao->selecionaEditoras($nomeDaEditora));
         if(!$editora) {
@@ -50,7 +51,9 @@ switch ($query) {
             $edicao->addUsuarioLeitor($idUsuarioLogado, $dataInicio, $dataFim);
         }
         
-        $edicao->addLivro($livro);
+        foreach ($livros as $livro) {
+            $edicao->addLivro($livro);    
+        }
         
         $idEdicao = $edicaoDao->insereEdicao($edicao);
         

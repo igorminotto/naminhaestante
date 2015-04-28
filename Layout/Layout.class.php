@@ -19,16 +19,16 @@ class Layout {
         $menuDropdown = self::menuDrop();
         $menuAdiciona = self::menuAdiciona();
         $html = <<<END
-<div class='corPadrao menuSuperior' style='height:65px;'>
-    <div style='padding:0px;margin-left:0px'>
+<div class='corPadrao menuSuperior' style='height:58px;padding:2px'>
+    <div style='padding:0px;margin-left:0px;padding:2px'>
         <table width='100%'><tr>
-            <td width='40%' style='text-align: left' >
+            <td width='40%' style='text-align: left;padding:2px' >
                 <nav>
                 $menuDropdown
                 $menuAdiciona
                 </nav>
             </td>
-            <td width='20%' align=center>
+            <td width='20%' align='center'>
                 <h3>Na Minha Estante</h3>
             </td>
             <td width='40%' style='text-align: right;'>

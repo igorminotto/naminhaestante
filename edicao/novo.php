@@ -2,9 +2,16 @@
 require_once '../autoloader.php';
 
 use controller\controladorDeSessao;
+use dao\LivroDao;
 use Layout\Layout;
 
 $usuario = controladorDeSessao::selecionaUsuarioLogado();
+
+$idLivro = filter_input(INPUT_GET, 'idLivro', FILTER_VALIDATE_INT);
+if($idLivro) {
+    $livroDao = new LivroDao;
+    $livro = $livroDao->selecionaLivro($idLivro);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,13 +46,18 @@ $usuario = controladorDeSessao::selecionaUsuarioLogado();
                 <div class='divisoria'>
                         
                     <?php include_once 'form.php' ?>    
-                    <br/>
-                    <br/>
-                    <div style="text-align:center"><b>Livros</b></div>
+                    
                     <div class="livros">
-                        <?php include_once '../livros/campo.php';?>      
+                        <?php 
+                        if($idLivro) {
+                            echo "<input type=\"hidden\" name=\"livros[]\" value=\"{$livro->getTitulo()}\">";
+                        } else {
+                            echo '<br/><br/><div style="text-align:center"><b>Livros</b></div>';
+                            include_once '../livros/campo.php';
+                            echo '<br><br>';
+                        }
+                        ?>      
                     </div>
-                    <br/>
                 </div>
                 <br/>
                 <input class="botaoVerde" name='query' value='Inserir' type="submit"/>

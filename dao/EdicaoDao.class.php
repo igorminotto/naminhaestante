@@ -118,8 +118,8 @@ class EdicaoDao extends ConnectionFactory {
     public function adicionaLeitorAEdicao($idUsuarioLeitor, Edicao $edicao) {
         $query = "INSERT INTO edicoes_lidas (id_usuario, id_edicao,data_inicio,data_fim)"
                 . "VALUES ({$idUsuarioLeitor},{$edicao->getId()},"
-                . "'{$edicao->getDataInicio($idUsuarioLeitor)->getDataFormatBanco()}',"
-                . "'{$edicao->getDataFim($idUsuarioLeitor)->getDataFormatBanco()}') ";
+                . "'{$edicao->getDataInicio($idUsuarioLeitor)->getDataFormatoBanco()}',"
+                . "'{$edicao->getDataFim($idUsuarioLeitor)->getDataFormatoBanco()}') ";
         $result = $this->executaQuery($query);
         return ($result)?$this->getLastId():$result;
     }
